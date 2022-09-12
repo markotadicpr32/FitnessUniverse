@@ -1,0 +1,48 @@
+﻿@using FitnessUniverse.Models
+@model Korisnik
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body {
+            background: #b3fef9;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Moj profil</title>
+</head>
+<body>
+    <div>
+
+        <form action="~/Home/IzmeniProfil" method="post">
+            <input type="hidden" value="@Model.Username" name="us" />
+            <label>Korisnicko ime :</label>
+            <lable> @Model.Username</lable><br />
+
+
+            <label>Ime :</label>
+            <label> @Model.Ime</label><br />
+            <label>Prezime :</label>
+            <label> @Model.Prezime</label><br />
+            <label>Pol :</label>
+            <label> @Model.Pol</label><br />
+
+            <label>Email :</label>
+            <label> @Model.Email</label><br />
+            <label>Datum rodjenja :</label>
+            <label> @Model.DatumRodjenja.ToShortDateString()</label><br />
+
+
+            <input type="submit" value="IZMENI PROFIL" />
+
+
+
+        </form>
+    </div>
+</body>
+</html>

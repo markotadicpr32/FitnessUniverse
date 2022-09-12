@@ -1,0 +1,176 @@
+﻿@using FitnessUniverse.Models
+@model IEnumerable<FitnesCentar>
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <style>
+            body {
+                background: #b3fef9;
+            }
+
+            .AName {
+                font: large;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            label {
+                font-family: 'Agency FB';
+                font-size: large;
+            }
+
+            .search {
+                background: #d9d9d9;
+            }
+
+            .sort {
+                background: #d9d9d9;
+            }
+
+            .tab {
+                border: 5px solid #454545;
+                background: #adadad;
+                text-align: center;
+            }
+
+            h4 {
+                align-self: center;
+            }
+        </style>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        <div>
+            <h1 colour="red"> DOBRODOSLI U FITNESS UNIVERSE</h1>
+
+
+
+            <h2> @ViewBag.message </h2>
+
+
+
+            @if (ViewBag.message != " Dobrodosli! Ulogujte se ili napravite profil!")
+            {
+                <a href="~/Home/MyAccount"> MOJ PROFIL </a> <br> <a href="~/Home/Logout"> LOG OUT</a>
+            }
+            else
+            {
+                <a href="~/Home/Login"> LOG IN  </a> <br> <a href="~/Home/Register">  REGISTER </a>
+            }
+
+            <h4>		Spisak fitnes centara:</h4>
+
+
+            <form action="~/Home/PretragaSortiranje">
+                <div class="search">
+
+                    <table style="width: 100%; margin-left: 50px">
+                        <tr><td align="left" colspan="2"> <label>PRETRAGA/SORTIRANJE</label></td></tr>
+                        <tr>
+                            <td>Naziv: <input type="text" name="name" /> </td>
+                            <td rowspan="9" align="center" valign="middle" style="width: 50%">
+                                <div style="text-align:center">
+                                    <input type="submit" value="PRETRAZI" style=" font-size: large; font-family:AIGDT; width: 200px; height: 70px" />
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Adresa: <input type="text" name="address" /> </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label> Najranija godina otvaranja:</label>
+                                <input type="text" name="mingod" value="YYYY" size="4" />
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Najkasnija godina otvaranja:</label>
+                                <input type="text" name="maxgod" value="YYYY" size="4" />
+                            </td>
+                        </tr>
+
+                        <tr class="sort">
+                            <td>
+                                <label> Izaberite sortiranje: </label>
+                                <input list="sortby" name="sortby" size="27" />
+                                <datalist id="sortby">
+                                    <option value="Sortiraj po Nazivu"></option>
+                                    <option value="Sortiraj po Adresi"></option>
+                                    <option value="Sortiraj po Godini otvaranja"></option>
+                                </datalist>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Izaberite smer sortiranja: </label>
+                                <input list="sortin" name="sortin" />
+                                <datalist id="sortin">
+                                    <option value="Opadajuce"></option>
+                                    <option value="Rastuce"></option>
+
+                                </datalist>
+                            </td>
+                        </tr>
+
+
+
+                    </table>
+                </div>
+            </form>
+
+
+            @foreach (var m in Model)
+            {
+
+                
+                    <form action="~/Home/Detalji">
+                        <table cellspacing="10" class="tab" style="width: 100%">
+                            <tr>
+                                <td>
+                                    Naziv:
+
+                                </td>
+                                <td>
+                                    Adresa:
+                                </td>
+                                <td>
+                                    Godina otvaranja:
+                                </td>
+
+
+                            </tr>
+                            <tr>
+
+                                <td fontsize="2" width="100" align="center"><p colour="red">  @m.Naziv </p></td>
+                                <td fontsize="2" width="100" align="center"><p colour="red">  @m.Adresa </p></td>
+                                <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja </p></td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td colspan="4" align="center"> <input type="hidden" value="@m.Naziv" name="name"><input type="submit" value="DETALJI" style="width: 100px" /></td>
+                            </tr>
+                        </table>
+                    </form>
+                
+            }
+        </div>
+
+
+
+
+    </body>
+</html>

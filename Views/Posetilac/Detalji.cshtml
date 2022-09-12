@@ -1,0 +1,153 @@
+﻿@using FitnessUniverse.Models
+@model FitnesCentar
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <style>
+        .map {
+            height: 150px;
+            width: 100%;
+        }
+
+        .search {
+            background: #a0a0a0;
+        }
+
+        .sort {
+            background: #a0a0a0;
+        }
+
+        body {
+            background: #b3fef9;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Detalji</title>
+</head>
+<body>
+    <div>
+        <h3> @Model.Naziv </h3>
+
+        <table cellspacing="10" style="width: 100%">
+            <tr width="100%">
+                <td colspan="5" class="AName" align="center"> @Model.Naziv  </td>
+
+            </tr>
+            <tr>
+                <td style="width: 30px; text-align: center;">
+                    Adresa:
+
+                </td>
+                <td style="width: 30px; text-align: center;">
+                    Godina otvaranja:
+                </td>
+                <td style="width: 30px; text-align: center;">
+                    Vlasnik:
+                </td>
+                <td style="width: 30px; text-align: center;">
+                    Cena mesecne clanarine:
+                </td>
+                <td style="width: 30px; text-align: center;">
+                    Cena godisnje clanarine:
+                </td>
+                <td style="width: 30px; text-align: center;">
+                    Cena jednog treninga:
+                </td>
+                <td style="width: 30px; text-align: center;">
+                    Cena jednog grupnog treninga:
+                </td>
+                <td style="width: 30px; text-align: center;">
+                    Cena treninga sa personalnim trenerom:
+                </td>
+
+            </tr>
+            <tr width="100%">
+
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.Adresa /p></td>
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.GodinaOtvaranja </p></td>
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.Vlasnik </p></td>
+
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaMesec  RSD</p></td>
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaGodina  RSD</p></td>
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaTrening  RSD</p></td>
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaGrupni  RSD</p></td>
+                <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaPersonal  RSD</p></td>
+            </tr>
+
+        </table>
+
+
+        <h4>Predstojeci grupni treninzi:</h4>
+
+
+        @foreach (var s in Model.GrupniTreninzi)
+        {
+            if (s.datumVreme > ViewBag.time)
+            {
+                <form action="~/Home/Prijava">
+                    <table>
+                        <tr>
+                            <td>  @s.Naziv   </td>
+
+                        </tr>
+                        <tr>
+                            <td> Tip treninga: @s.Tip</td>
+                        </tr>
+                        <tr>
+                            <td> Trajanje treninga: @s.Trajanje</td>
+                        </tr>
+                        <tr>
+                            <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
+                        </tr>
+                        <tr>
+                            <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Broj posetioca trenutno prijavljenih:
+                                @//IZBROJ POSETIOCE
+                            </td>
+                        </tr>
+                        @//AKO JE ULOGOVAN DAJ OPCIJU DA SE PRIJAVI ZA TRENINGA
+                    </table>
+                </form>
+            }
+        }
+
+        @foreach (var c in Model.Komentari)
+        {
+            if (!c.IsDeleted && c.Aprooved)
+            {
+                <table>
+                    <tr>
+                        <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Ocena: @c.Ocena od 5</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @c.Tekst
+                        </td>
+                    </tr>
+                </table>
+            }
+        }
+
+
+
+    </div>
+</body>
+</html>

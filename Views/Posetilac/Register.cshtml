@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body style="background: #c0f1fc; align-content:center;">
+    <div style="align-self:center; align-content:center; text-align:center; align-items:center; border:solid 1px black;">
+
+        <h2> Unesite svoje podatke </h2>
+
+
+        <form action="~/Home/RegisterC" method="post">
+
+            <label>Korisnicko ime :</label>
+            <input type="text" name="us" /><br />
+            <label>Lozinka :</label>
+            <input type="password" name="pass" /><br />
+            <label>Ime :</label>
+            <input type="text" name="fname" /><br />
+            <label>Prezime :</label>
+            <input type="text" name="lname" /><br />
+            <label>Pol :</label>
+            <input list="genders" name="pol" /><br />
+
+            <datalist id="genders">
+                <option value="Zensko"></option>
+                <option value="Musko"></option>
+            </datalist>
+
+            <label>Email :</label>
+            <input type="email" name="mail" /><br />
+            <label>Datum rodjenja :</label>
+            <input type="text" name="bdated" value="DD" size="2" /><label><b>/</b></label>
+            <input type="text" name="bdatem" value="MM" size="2" /><label><b>/</b></label>
+            <input type="text" name="bdatey" value="YYYY" size="4" /> <br />
+
+
+            <input type="submit" value="REGISTER" />
+
+
+
+        </form>
+
+
+
+
+    </div>
+</body>
+</html>

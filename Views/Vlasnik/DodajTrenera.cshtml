@@ -1,0 +1,58 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body {
+            background: #b3fef9;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dodavanje trenera</title>
+</head>
+<body>
+    <div style="align-content:center;">
+
+
+        <h2> Unesite podatke o treneru: </h2>
+
+
+        <form action="~/Vlasnik/RegisterT" method="post">
+
+            <label>Korisnicko ime :</label>
+            <input type="text" name="us" /><br />
+            <label>Lozinka :</label>
+            <input type="password" name="ps" /><br />
+            <label>Ime :</label>
+            <input type="text" name="fname" /><br />
+            <label>Prezime :</label>
+            <input type="text" name="lname" /><br />
+            <label>Pol :</label>
+            <input list="genders" name="pol" /><br />
+
+            <datalist id="genders">
+                <option value="Zensko"></option>
+                <option value="Musko"></option>
+            </datalist>
+
+            <label>Email :</label>
+            <input type="email" name="mail" /><br />
+            <label>Datum rodjenja:</label>
+            <input type="text" name="bdated" value="DD" size="2" /><label><b>/</b></label>
+            <input type="text" name="bdatem" value="MM" size="2" /><label><b>/</b></label>
+            <input type="text" name="bdatey" value="YYYY" size="4" />
+
+
+            <input type="submit" value="REGISTER" />
+
+
+
+        </form>
+
+    </div>
+</body>
+</html>
