@@ -21,6 +21,7 @@ namespace FitnessUniverse.Models
             GTAngazovan = new List<GrupniTrening>();
             //FCAngazovan = fcangazovan;
             FCVlasnik = new List<FitnesCentar>();
+            Cancels = 0;
             IsDeleted = false;
         }
         public string Username { get; set; }
@@ -33,9 +34,8 @@ namespace FitnessUniverse.Models
         public string Uloga { get; set; }
         public List<GrupniTrening> GTPrijavljen { get; set; }
         public List<GrupniTrening> GTAngazovan { get; set; }
-        //public FitnesCentar FCAngazovan { get; set; }
         public List<FitnesCentar> FCVlasnik { get; set; }
         public bool IsDeleted { get; set; }
-
+        public int Cancels { get; set; }
     }
 }

@@ -7,11 +7,10 @@ namespace FitnessUniverse.Models
 {
     public class GrupniTrening
     {
-        public GrupniTrening(string naziv, string tip, FitnesCentar fc, int trajanje, DateTime datumVreme, int maxPosetioci)
+        public GrupniTrening(string naziv, string tip, int trajanje, DateTime datumVreme, int maxPosetioci)
         {
             Naziv = naziv;
             Tip = tip;
-            Fc = fc;
             Trajanje = trajanje;
             DatumVreme = datumVreme;
             MaxPosetioci = maxPosetioci;
@@ -20,7 +19,7 @@ namespace FitnessUniverse.Models
         }
         public string Naziv { get; set; }
         public string Tip { get; set; }
-        public FitnesCentar Fc { get; set; }
+        public string Fc { get; set; }
         public int Trajanje { get; set; }
         public DateTime DatumVreme { get; set; }
         public int MaxPosetioci { get; set; }

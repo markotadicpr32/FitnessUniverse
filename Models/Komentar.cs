@@ -17,6 +17,7 @@ namespace FitnessUniverse.Models
             IsApproved = false;
         }
         public string Posetilac { get; set; }
+        public int ID { get; set; }
         public string Centar { get; set; }
         public string Tekst { get; set; }
         public int Ocena { get; set; }

@@ -1,8 +1,6 @@
 ﻿@using FitnessUniverse.Models
 @model FitnesCentar
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
@@ -85,54 +83,53 @@
         {
             if (s.DatumVreme > ViewBag.time)
             {
-                <form action="~/Posetilac/LogIn">
-                    <table>
-                        <tr>
-                            <td>  @s.Naziv   </td>
-                        </tr>
-                        <tr>
-                            <td> Tip treninga: @s.Tip</td>
-                        </tr>
-                        <tr>
-                            <td> Trajanje treninga: @s.Trajanje</td>
-                        </tr>
-                        <tr>
-                            <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
-                        </tr>
-                        <tr>
-                            <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Broj posetioca trenutno prijavljenih:
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+<form action="~/Posetilac/LogIn">
+    <table>
+        <tr>
+            <td>  @s.Naziv   </td>
+        </tr>
+        <tr>
+            <td> Tip treninga: @s.Tip</td>
+        </tr>
+        <tr>
+            <td> Trajanje treninga: @s.Trajanje</td>
+        </tr>
+        <tr>
+            <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
+        </tr>
+        <tr>
+            <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
+        </tr>
+        <tr>
+            <td>
+                Broj posetioca trenutno prijavljenih:
+            </td>
+        </tr>
+    </table>
+</form>}
             }
-        }
 
         @foreach (var c in Model.Komentari)
         {
             if (!c.IsDeleted && c.IsApproved)
             {
-                <table>
-                    <tr>
-                        <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>Ocena: @c.Ocena od 5</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @c.Tekst
-                        </td>
-                    </tr>
-                </table>
+<table>
+    <tr>
+        <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
+    </tr>
+    <tr>
+        <td>
+            <p>Ocena: @c.Ocena od 5</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @c.Tekst
+        </td>
+    </tr>
+</table>}
             }
-        }
     </div>
 </body>
 </html>
+

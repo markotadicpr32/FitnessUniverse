@@ -1,8 +1,6 @@
 ﻿@using FitnessUniverse.Models
 @model FitnesCentar
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
@@ -85,54 +83,67 @@
         {
             if (s.DatumVreme > ViewBag.time)
             {
-                <form action="~/Posetilac/LogIn">
-                    <table>
-                        <tr>
-                            <td>  @s.Naziv   </td>
-                        </tr>
-                        <tr>
-                            <td> Tip treninga: @s.Tip</td>
-                        </tr>
-                        <tr>
-                            <td> Trajanje treninga: @s.Trajanje</td>
-                        </tr>
-                        <tr>
-                            <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
-                        </tr>
-                        <tr>
-                            <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Broj posetioca trenutno prijavljenih:
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            }
-        }
+    <form action="~/Posetilac/LogIn">
+        <table>
+            <tr>
+                <td>  @s.Naziv   </td>
+            </tr>
+            <tr>
+                <td> Tip treninga: @s.Tip</td>
+            </tr>
+            <tr>
+                <td> Trajanje treninga: @s.Trajanje</td>
+            </tr>
+            <tr>
+                <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
+            </tr>
+            <tr>
+                <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
+            </tr>
+            <tr>
+                <td>
+                    Broj posetioca trenutno prijavljenih:
+                </td>
+            </tr>
+        </table>
+    </form>}
+}
 
         @foreach (var c in Model.Komentari)
         {
-            if (!c.IsDeleted && c.IsApproved)
+            if ((!c.IsDeleted && c.IsApproved) || (Model.Vlasnik == ViewBag.user))
             {
-                <table>
-                    <tr>
-                        <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>Ocena: @c.Ocena od 5</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @c.Tekst
-                        </td>
-                    </tr>
-                </table>
-            }
-        }
+
+                if (!c.IsApproved)
+                {
+    <form action="~/Vlasnik/IsApproved">
+        <input type="hidden" value="@Model.Naziv" name="name" />
+        <input type="hidden" value="@c.ID" name="id" />
+        <input type="submit" value="ODOBRI KOMENTAR" />
+    </form>
+    <form action="~/Vlasnik/DelComment">
+        <input type="hidden" value="@Model.Naziv" name="name" />
+        <input type="hidden" value="@c.ID" name="id" />
+        <input type="submit" value="ODOBRI KOMENTAR" />
+    </form> }
+
+                            <table>
+                                <tr>
+                                    <td align="left"> <label>User: @c.Posetilac </label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @c.Tekst
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <p>Ocena: @c.Ocena od 5</p>
+                                    </td>
+                                </tr>
+                            </table>}
+                                        }
     </div>
 </body>
 </html>

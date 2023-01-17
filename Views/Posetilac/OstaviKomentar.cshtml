@@ -13,15 +13,10 @@
 </head>
 <body>
     <div>
-
-        <form action="~/Home/Komentarisi">
-
+        <form action="~/Posetilac/Komentarisi">
             <input type="hidden" name="name" value="@Model.Naziv" />
-
             <input type="text" name="text" height="300" width=" 600" />
-
             <input list="grades" name="grade" /><br />
-
             <datalist id="grades">
                 <option value="1"></option>
                 <option value="2"></option>
@@ -29,15 +24,8 @@
                 <option value="4"></option>
                 <option value="5"></option>
             </datalist>
-
-
             <input type="submit" value="Ostavi komentar" />
-
-
         </form>
-
-
-
     </div>
 </body>
 </html>

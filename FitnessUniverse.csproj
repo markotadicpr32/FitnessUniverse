@@ -88,13 +88,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppData\gt.txt" />
+    <Content Include="AppData\fc.txt" />
+    <Content Include="AppData\users.txt" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppStart\RouteConfig.cs" />
+    <Compile Include="Controllers\PosetilacController.cs" />
+    <Compile Include="Controllers\TrenerController.cs" />
+    <Compile Include="Controllers\VlasnikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\FitnesCentar.cs" />
     <Compile Include="Models\GrupniTrening.cs" />
     <Compile Include="Models\Komentar.cs" />
@@ -120,7 +129,13 @@
     <Content Include="Views\Trener\DodajTrening.cshtml" />
     <Content Include="Views\Posetilac\OstaviKomentar.cshtml" />
     <Content Include="Views\Vlasnik\PregledFitnesCentara.cshtml" />
-    <Content Include="Views\Vlasnik\NoviKomentari.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Vlasnik\DodajFC.cshtml" />
+    <Content Include="Views\Vlasnik\IzmenaFC.cshtml" />
+    <Content Include="Views\Trener\Detalji.cshtml" />
+    <Content Include="Views\Vlasnik\Detalji.cshtml" />
+    <Content Include="Views\web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -128,9 +143,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

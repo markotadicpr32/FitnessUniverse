@@ -1,17 +1,61 @@
-﻿@{
-    Layout = null;
-}
+﻿@using FitnessUniverse.Models
+@model IEnumerable<Korisnik>
+    @{
+        Layout = null;
+    }
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
+    <html>
+    <head>
+        <style>
+            body {
+                background: #b3fef9;
+            }
+        </style>
+        <meta name="viewport" content="width=device-width" />
+        <title>Treneri</title>
+    </head>
+    <body>
+
+
+        <form action="~/Vlasnik/DodajTrenera">
+            <input type="submit" value="DODAJ TRENERA" />
+        </form>
+
+
+        @foreach (var m in Model)//provera dal je trener
+        {
+
+
+            <form action="~/Vlasnik/Blokiraj">
+                <table cellspacing="10">
+                    
+                    <tr>
+                        <td style="width: 30px; text-align: center;">
+                            Ime:
+
+                        </td>
+                        <td style="width: 30px; text-align: center;">
+                            Prezime:
+                        </td>
+
+                    </tr>
+                    <tr width="100%">
+
+                        <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @m.Ime /p></td>
+                        <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @m.Prezime </p></td>
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="4" align="center"> <input type="hidden" value="@m.Username" name="name"><input type="submit" value="BLOKIRAJ" /></td>
+                    </tr>
+                </table>
+            </form>
+            <form action="~/Vlasnik/ObrisiT">
+                <input type="submit" value="OBRISI TRENERA" />
+            </form>
+        }
+    </body>
 </html>

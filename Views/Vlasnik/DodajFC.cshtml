@@ -1,0 +1,116 @@
+﻿@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <style>
+        body {
+            background: #b3fef9;
+        }
+
+        label {
+            font-family: 'Agency FB';
+            font-size: large;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dodaj fitnes centar</title>
+</head>
+<body>
+
+    <h2>  @ViewBag.error</h2>
+
+
+    <div>
+
+
+        <h3> Unesi podatke o fitnes centru</h3>
+
+        <form action="~/Vlasnik/UnesiFC" method="post" enctype="multipart/form-data">
+            <table align="center" style="border: solid 1px black;">
+                <tr>
+                    <td>
+                        <label> Naziv Fitnes centra: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="naziv" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label> Adresa Fitnes centra: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="adresa" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label> Godina otvaranja:  </label>
+                    </td>
+                    <td>
+                        <input type="text" name="bdatey" value="YYYY" size="4" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena mesecne clanarine: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenam" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena godisnje clanarine: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenag" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena treninga: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenat" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena grupnog treninga: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenagt" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena personalnog treninga: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenapt" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+
+            </table>
+            <input type="submit" value="DODAJ FITNES CENTAR" style="align-self:center; " />
+        </form>
+    </div>
+</body>
+</html>

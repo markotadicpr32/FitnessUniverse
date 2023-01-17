@@ -1,17 +1,52 @@
-﻿@{
-    Layout = null;
-}
+﻿@using FitnessUniverse.Models
+@model GrupniTrening
+    @{ Layout = null; }
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
+    <html>
+    <head>
+        <style>
+            body {
+                background: #b3fef9;
+            }
+        </style>
+        <meta name="viewport" content="width=device-width" />
+        <title>Izmena treninga</title>
+    </head>
+    <body>
+        <div>
+
+            <form action="~/Trener/IzmenaT" method="post">
+
+                <label>Naziv :</label>
+                <lable> @Model.Naziv</lable><br />
+                <input type="hidden" value="@Model.Naziv " name="naziv" /><br />
+                <label>Tip :</label>
+                <input list="type" name="tip" value="@Model.Tip" /><br />
+
+                <datalist id="type">
+                    <option value="Yoga"></option>
+                    <option value="Les Mills Tone"></option>
+                    <option value="Body Pump"></option>
+                </datalist>
+                <label>Trajanje :</label>
+                <input type="text" name="duration" value="@Model.Trajanje" /><br />
+                <label>Vreme treninga :</label>
+                <input type="text" name="vdateh" value="@Model.DatumVreme.Hour" size="2" /><label><b>/</b></label>
+                <input type="text" name="vdatem" value="@Model.DatumVreme.Minute" size="2" /><label><b>/</b></label>
+                <label>Maksimalan broj posetioca :</label>
+                <input type="text" name="max" value="@Model.MaxPosetioci" /><br />
+
+
+                <input type="submit" value="IZMENI TRENING" />
+
+
+
+            </form>
+
+
+
+        </div>
+    </body>
 </html>

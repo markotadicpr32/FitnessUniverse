@@ -1,17 +1,109 @@
-﻿@{
-    Layout = null;
-}
+﻿@using FitnessUniverse.Models
+@model IEnumerable<GrupniTrening>
+    @{ Layout = null; }
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
+    <html>
+    <head>
+        <style>
+            body {
+                background: #b3fef9;
+            }
+        </style>
+        <meta name="viewport" content="width=device-width" />
+        <title>Previous</title>
+    </head>
+    <body>
+
+        <h4>Lista Vasih zavrsenih treninga:</h4>
+
+        <div class="sort">
+            <form action="~/Posetilac/PretragaSortiranjeProsli">
+                <table>
+
+                    <tr>
+                        <td>Naziv: <input type="text" name="name" /> </td>
+                    </tr>
+                    <tr>
+                        <td>Fitnes centar: <input type="text" name="name" /> </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Tip treninga: </label>
+                            <input list="atype" name="tip" /><br />
+
+                            <datalist id="atype">
+                                <option value="Yoga"></option>
+                                <option value="Les mills tone"></option>
+                                <option value="Body pump"></option>
+
+                            </datalist>
+                        </td>
+                    </tr>
+
+                </table>
+                <label> Izaberite tip sortiranja: </label>
+                <input list="sortby" name="sorttby" />
+                <datalist id="sortby">
+                    <option value="Sortiraj po Nazivu"></option>
+                    <option value="Sortiraj po Tipu treninga"></option>
+                    <option value="Sortiraj po Datumu/vremenu odrzavanja treninga"></option>
+                </datalist>
+                <label>Izaberite smer sortiranja: </label>
+                <input list="sortin" name="sorttin" />
+                <datalist id="sortin">
+                    <option value="Opadajuce"></option>
+                    <option value="Rastuce"></option>
+
+                </datalist>
+
+
+                <input type="submit" value="PRETRAZI" />
+            </form>
+        </div>
+
+
+
+
+
+        @foreach (var m in Model)
+        {
+
+
+    <table cellspacing="10">
+        <tr>
+            <td colspan="5" class="AName" align="center"> @m.Naziv  </td>
+
+        </tr>
+        <tr>
+            <td>
+                Naziv:
+            </td>
+            <td>
+                Fitnes centar:
+            </td>
+            <td>
+                Tip treninga:
+            </td>
+            <td>
+                Trajanje treninga:
+            </td>
+            <td>
+                Datum/vreme treninga:
+            </td>
+
+        </tr>
+        <tr>
+            <td fontsize="2" width="100" align="center"><p colour="red">  @m.Naziv </p></td>
+            <td fontsize="2" width="100" align="center"><p colour="red">  @m.Fc </p></td>
+            <td fontsize="2" width="100" align="center"><p colour="red">  @m.Tip </p></td>
+            <td fontsize="2" width="100" align="center"><p colour="red">  @m.Trajanje </p></td>
+
+            <td> @m.DatumVreme.ToShortDateString()</td>
+
+        </tr>
+    </table>
+        }
+    </body>
 </html>

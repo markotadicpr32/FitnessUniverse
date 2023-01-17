@@ -18,30 +18,21 @@
 </head>
 <body>
     <div>
-
-        <form action="~/Home/IzmeniProfil" method="post">
+        <form action="~/Posetilac/IzmeniProfil" method="post">
             <input type="hidden" value="@Model.Username" name="us" />
             <label>Korisnicko ime :</label>
             <lable> @Model.Username</lable><br />
-
-
             <label>Ime :</label>
             <label> @Model.Ime</label><br />
             <label>Prezime :</label>
             <label> @Model.Prezime</label><br />
             <label>Pol :</label>
             <label> @Model.Pol</label><br />
-
             <label>Email :</label>
             <label> @Model.Email</label><br />
             <label>Datum rodjenja :</label>
             <label> @Model.DatumRodjenja.ToShortDateString()</label><br />
-
-
             <input type="submit" value="IZMENI PROFIL" />
-
-
-
         </form>
     </div>
 </body>

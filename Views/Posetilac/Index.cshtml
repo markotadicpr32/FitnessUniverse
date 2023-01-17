@@ -6,8 +6,6 @@
 
     <!DOCTYPE html>
 
-    <!DOCTYPE html>
-
     <html>
     <head>
         <style>
@@ -49,28 +47,21 @@
     <body>
         <div>
             <h1 colour="red"> DOBRODOSLI U FITNESS UNIVERSE</h1>
-
-
-
             <h2> @ViewBag.message </h2>
-
-
 
             @if (ViewBag.message != " Dobrodosli! Ulogujte se ili napravite profil!")
             {
-                <a href="~/Home/MyAccount"> MOJ PROFIL </a> <br> <a href="~/Home/Logout"> LOG OUT</a>
+                <a href="~/Posetilac/LogIn"> LOG IN  </a> <br> <a href="~/Posetilac/Register">  REGISTER </a>
+                
             }
             else
             {
-                <a href="~/Home/Login"> LOG IN  </a> <br> <a href="~/Home/Register">  REGISTER </a>
+                <a href="~/Posetilac/MojProfil"> MOJ PROFIL </a> <br> <a href="~/Posetilac/LogOut"> LOG OUT</a>
             }
 
             <h4>		Spisak fitnes centara:</h4>
-
-
-            <form action="~/Home/PretragaSortiranje">
+            <form action="~/Posetilac/PretragaSortiranje">
                 <div class="search">
-
                     <table style="width: 100%; margin-left: 50px">
                         <tr><td align="left" colspan="2"> <label>PRETRAGA/SORTIRANJE</label></td></tr>
                         <tr>
@@ -81,18 +72,15 @@
                                 </div>
                             </td>
                         </tr>
-
                         <tr>
                             <td>Adresa: <input type="text" name="address" /> </td>
                         </tr>
-
                         <tr>
                             <td>
                                 <label> Najranija godina otvaranja:</label>
                                 <input type="text" name="mingod" value="YYYY" size="4" />
 
                             </td>
-
                         </tr>
                         <tr>
                             <td>
@@ -100,7 +88,6 @@
                                 <input type="text" name="maxgod" value="YYYY" size="4" />
                             </td>
                         </tr>
-
                         <tr class="sort">
                             <td>
                                 <label> Izaberite sortiranje: </label>
@@ -123,19 +110,13 @@
                                 </datalist>
                             </td>
                         </tr>
-
-
-
                     </table>
                 </div>
             </form>
 
-
             @foreach (var m in Model)
             {
-
-                
-                    <form action="~/Home/Detalji">
+                    <form action="~/Posetilac/Detalji">
                         <table cellspacing="10" class="tab" style="width: 100%">
                             <tr>
                                 <td>
@@ -148,29 +129,20 @@
                                 <td>
                                     Godina otvaranja:
                                 </td>
-
-
                             </tr>
                             <tr>
 
                                 <td fontsize="2" width="100" align="center"><p colour="red">  @m.Naziv </p></td>
                                 <td fontsize="2" width="100" align="center"><p colour="red">  @m.Adresa </p></td>
                                 <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja </p></td>
-
                             </tr>
-
                             <tr>
 
                                 <td colspan="4" align="center"> <input type="hidden" value="@m.Naziv" name="name"><input type="submit" value="DETALJI" style="width: 100px" /></td>
                             </tr>
                         </table>
                     </form>
-                
             }
         </div>
-
-
-
-
     </body>
 </html>

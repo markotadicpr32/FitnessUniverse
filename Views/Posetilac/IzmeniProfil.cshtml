@@ -18,41 +18,28 @@
 </head>
 <body>
     <div>
-
-        <form action="~/Home/Izmena" method="post">
-
+        <form action="~/Posetilac/Izmena" method="post">
             <label>Korisnicko ime :</label>
             <lable> @Model.Username</lable><br />
             <input type="hidden" value="@Model.Username " name="us" /><br />
-
             <label>Ime :</label>
             <input type="text" name="fname" value="@Model.Ime" /><br />
             <label>Prezime :</label>
             <input type="text" name="lname" value="@Model.Prezime" /><br />
             <label>Pol :</label>
             <input list="genders" name="pol" value="@Model.Pol" /><br />
-
             <datalist id="genders">
                 <option value="Zensko"></option>
                 <option value="Musko"></option>
             </datalist>
-
             <label>Email :</label>
             <input type="email" name="mail" value="@Model.Email" /><br />
             <label>Datum rodjenja :</label>
             <input type="text" name="bdated" value="@Model.DatumRodjenja.Day" size="2" /><label><b>/</b></label>
             <input type="text" name="bdatem" value="@Model.DatumRodjenja.Month" size="2" /><label><b>/</b></label>
             <input type="text" name="bdatey" value="@Model.DatumRodjenja.Year" size="4" />
-
-
             <input type="submit" value="IZMENI PROFIL" />
-
-
-
         </form>
-
-
-
     </div>
 </body>
 </html>

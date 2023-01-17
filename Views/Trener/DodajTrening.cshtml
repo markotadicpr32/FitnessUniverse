@@ -6,12 +6,48 @@
 
 <html>
 <head>
+    <style>
+        body {
+            background: #b3fef9;
+        }
+    </style>
     <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <title>Dodavanje treninga</title>
 </head>
 <body>
-    <div>
-    
+    <div style="align-content:center;">
+
+
+        <h2> Unesite podatke o treningu: </h2>
+
+
+        <form action="~/Trener/UnesiT" method="post">
+
+            <label>Naziv treninga :</label>
+            <input type="text" name="naziv" /><br />
+            <label>Tip treninga :</label>
+            <input list="type" name="tip" /><br />
+
+            <datalist id="type">
+                <option value="Yoga"></option>
+                <option value="Les Mills Tone"></option>
+                <option value="Body Pump"></option>
+            </datalist>
+            <label>Trajanje treninga :</label>
+            <input type="text" name="duration" size="3" /><br />
+            <label>Pocetak treninga:</label>
+            <input type="text" name="pdateh" value="HH" size="2" /><label><b>/</b></label>
+            <input type="text" name="pdatem" value="mm" size="2" /><label><b>/</b></label>
+            <label>Maksimalan broj posetioca :</label>
+            <input type="text" name="max" size="2"/><br />
+
+
+            <input type="submit" value="DODAJ TRENING" />
+
+
+
+        </form>
+
     </div>
 </body>
 </html>

@@ -1,0 +1,104 @@
+﻿@using FitnessUniverse.Models
+@model FitnesCentar
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body {
+            background: #b3fef9;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Izemena fitnes centra</title>
+</head>
+<body>
+    <div>
+        <form action="~/Vlasnik/IzmeniFC" method="post">
+            <table>
+                <tr>
+                    <td>
+                        <label> Naziv fitnes centra: </label>
+                    </td>
+                    <td>
+                        <label> @Model.Naziv </label> <input type="hidden" value="@Model.Naziv" name="naziv" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Adresa: </label>
+                    </td>
+                    <td>
+
+                        <input type="text" name="adresa" value="@Model.Adresa" />
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <label> Godina otvaranja:  </label>
+                    </td>
+                    <td>
+                        <input type="text" name="bdatey" value="@Model.GodinaOtvaranja.Year" size="4" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena mesecne clanarine: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenam" value="@Model.CenaMesec" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena godisnje clanarine: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenag" value="@Model.CenaGodina" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena treninga: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenat" value="@Model.CenaTrening" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena grupnog treninga: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenagt" value="@Model.CenaGrupni" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Cena personalnog treninga: </label>
+                    </td>
+                    <td>
+                        <input type="text" name="cenapt" value="@Model.CenaPersonal" />
+                        <label> rsd </label>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="IZMENI PROFIL" />
+        </form>
+    </div>
+</body>
+</html>
