@@ -19,43 +19,38 @@
     <body>
 
 
-        <form action="~/Vlasnik/DodajTrenera">
-            <input type="submit" value="DODAJ TRENERA" />
-        </form>
-
-
-        @foreach (var m in Model)//provera dal je trener
+        @foreach (var m in Model)
         {
+            if (m.Uloga == "Trener")
+            {
+                <form action="~/Vlasnik/ObrisiT">
+                    <table cellspacing="10">
+
+                        <tr>
+                            <td style="width: 30px; text-align: center;">
+                                Ime:
+
+                            </td>
+                            <td style="width: 30px; text-align: center;">
+                                Prezime:
+                            </td>
+
+                        </tr>
+                        <tr width="100%">
+
+                            <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @m.Ime /p></td>
+                            <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @m.Prezime </p></td>
+                        </tr>
+
+                        <tr>
+
+                            <td colspan="4" align="center"> <input type="hidden" value="@m.Username" name="name"><input type="submit" value="OBRISI TRENERA" /></td>
+                        </tr>
+                    </table>
+                </form>
+            }
 
 
-            <form action="~/Vlasnik/Blokiraj">
-                <table cellspacing="10">
-                    
-                    <tr>
-                        <td style="width: 30px; text-align: center;">
-                            Ime:
-
-                        </td>
-                        <td style="width: 30px; text-align: center;">
-                            Prezime:
-                        </td>
-
-                    </tr>
-                    <tr width="100%">
-
-                        <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @m.Ime /p></td>
-                        <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @m.Prezime </p></td>
-                    </tr>
-
-                    <tr>
-
-                        <td colspan="4" align="center"> <input type="hidden" value="@m.Username" name="name"><input type="submit" value="BLOKIRAJ" /></td>
-                    </tr>
-                </table>
-            </form>
-            <form action="~/Vlasnik/ObrisiT">
-                <input type="submit" value="OBRISI TRENERA" />
-            </form>
         }
     </body>
 </html>

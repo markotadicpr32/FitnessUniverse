@@ -31,7 +31,8 @@ namespace FitnessUniverse.Models
         public int CenaGrupni { get; set; }
         public int CenaPersonal { get; set; }
         public bool IsDeleted { get; set; }
-        public List<GrupniTrening> GrupniTreninzi{ get; set; }
+        public GrupniTrening Grupni { get; set; }
+        public List<GrupniTrening> GrupniTreninzi { get; set; }
         public List<Komentar> Komentari { get; set; }
     }
 }

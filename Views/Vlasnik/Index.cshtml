@@ -57,17 +57,19 @@
 
             <a href="~/Posetilac/MojProfil"> MOJ PROFIL </a> <br> <a href="~/Posetilac/LogOut"> LOG OUT</a>
 
-            <br><a href="~/Vlasnik/PregledTrenera"> Pregled trenera </a>
+                                                                  <form action="~/Vlasnik/DodajTrenera">
+                                                                      <input type="submit" value="DODAJ TRENERA" />
+                                                                  </form>
 
-            <br><a href="~/Vlasnik/PregledFitnesCentara"> Pregled fitnes centara </a>
-
-            <br><a href="~/Vlasnik/NoviKomentari"> Novi komentari </a>
+                <form action="~/Vlasnik/DodajFC">
+                    <input type="submit" value="DODAJ NOVI FITNES CENTAR" />
+                </form>
 
 
             <h4>		Spisak fitnes centara:</h4>
 
 
-            <form action="~/Posetilac/PretragaSortiranje">
+            <form action="~/Vlasnik/PretragaSortiranje">
                 <div class="search">
 
                     <table style="width: 100%; margin-left: 50px">
@@ -134,7 +136,7 @@
             {
 
 
-                <form action="~/Posetilac/Detalji">
+                <form action="~/Vlasnik/Detalji">
                     <table cellspacing="10" class="tab" style="width: 100%">
                         <tr>
                             <td>
@@ -154,7 +156,7 @@
 
                             <td fontsize="2" width="100" align="center"><p colour="red">  @m.Naziv </p></td>
                             <td fontsize="2" width="100" align="center"><p colour="red">  @m.Adresa </p></td>
-                            <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja </p></td>
+                            <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja.Year </p></td>
 
                         </tr>
 

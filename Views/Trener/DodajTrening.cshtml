@@ -1,6 +1,4 @@
-﻿@{
-    Layout = null;
-}
+﻿@{ Layout = null; }
 
 <!DOCTYPE html>
 
@@ -20,8 +18,7 @@
 
         <h2> Unesite podatke o treningu: </h2>
 
-
-        <form action="~/Trener/UnesiT" method="post">
+        <form action="UnosenjeTreninga" style="align-self:center;">
 
             <label>Naziv treninga :</label>
             <input type="text" name="naziv" /><br />
@@ -36,17 +33,22 @@
             <label>Trajanje treninga :</label>
             <input type="text" name="duration" size="3" /><br />
             <label>Pocetak treninga:</label>
+            <input type="text" name="pdatey" value="YYYY" size="4" /><label><b>/</b></label>
+            <input type="text" name="pdatemo" value="MM" size="2" /><label><b>/</b></label>
+            <input type="text" name="pdated" value="DD" size="2" /><label><b>/</b></label>
             <input type="text" name="pdateh" value="HH" size="2" /><label><b>/</b></label>
-            <input type="text" name="pdatem" value="mm" size="2" /><label><b>/</b></label>
+            <input type="text" name="pdatemi" value="mm" size="2" /><label><b>/</b></label>
             <label>Maksimalan broj posetioca :</label>
-            <input type="text" name="max" size="2"/><br />
-
+            <input type="text" name="max" size="2" /><br />
+            <input type="hidden" value="@ViewBag.naziv" name="nazivA" />
 
             <input type="submit" value="DODAJ TRENING" />
 
 
 
         </form>
+        }
+
 
     </div>
 </body>

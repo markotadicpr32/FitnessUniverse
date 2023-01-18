@@ -34,6 +34,253 @@
             <label> @Model.DatumRodjenja.ToShortDateString()</label><br />
             <input type="submit" value="IZMENI PROFIL" />
         </form>
+
+        @if (Model.Uloga == "Posetilac")
+        {
+    <form action="~/Posetilac/PretragaSortiranjeTr">
+        <div class="search">
+            <table style="width: 100%; margin-left: 50px">
+                <tr><td align="left" colspan="2"> <label>PRETRAGA/SORTIRANJE</label></td></tr>
+                <tr>
+                    <td>Naziv: <input type="text" name="name" /> </td>
+                    <td rowspan="9" align="center" valign="middle" style="width: 50%">
+                        <div style="text-align:center">
+                            <input type="submit" value="PRETRAZI" style=" font-size: large; font-family:AIGDT; width: 200px; height: 70px" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tip: <input list="type" name="tip" /><br />
+
+                        <datalist id="type">
+                            <option value="Yoga"></option>
+                            <option value="Les Mills Tone"></option>
+                            <option value="Body Pump"></option>
+                        </datalist>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label> Najranija godina otvaranja:</label>
+                        <input type="text" name="mingod" value="YYYY" size="4" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Najkasnija godina otvaranja:</label>
+                        <input type="text" name="maxgod" value="YYYY" size="4" />
+                    </td>
+                </tr>
+                <tr class="sort">
+                    <td>
+                        <label> Izaberite sortiranje: </label>
+                        <input list="sortby" name="sortby" size="27" />
+                        <datalist id="sortby">
+                            <option value="Sortiraj po Nazivu"></option>
+                            <option value="Sortiraj po Tipu treninga"></option>
+                            <option value="Sortiraj po Godini otvaranja"></option>
+                        </datalist>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Izaberite smer sortiranja: </label>
+                        <input list="sortin" name="sortin" />
+                        <datalist id="sortin">
+                            <option value="Opadajuce"></option>
+                            <option value="Rastuce"></option>
+
+                        </datalist>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form> foreach (var a in Model.GTPrijavljen)
+    {
+    <table>
+        cellspacing="10">
+        <tr>
+            <td colspan="5" class="AName" align="center"> @a.IzabraniTr.Naziv  </td>
+
+        </tr>
+        <tr>
+            <td>
+                Naziv:
+
+            </td>
+            <td>
+                Tip:
+            </td>
+            <td>
+                Vreme odrzavanja:
+            </td>
+            <td>
+                Trajanje
+            </td>
+
+        </tr>
+        <tr>
+            <td> @a.IzabraniTr.Naziv</td>
+            <td> @a.IzabraniTr.Tip</td>
+            <td> @a.IzabraniTr.DatumVreme.ToShortDateString()</td>
+            <td><p>  @a.IzabraniTr.Trajanje  minuta</p></td>
+
+
+        <tr>
+
+            <td colspan="4" align="center"><form action="~/Posetilac/Detalji"><input type="hidden" value="@a.IzabraniTr.Naziv" name="name"><input type="submit" value="DETALJI" /> </form> </td>
+
+        </tr>
+    </table> if (a.IzabraniTr.DatumVreme < DateTime.Now)
+    {
+    <table>
+        <tr>
+            <td align="center">
+                <form action="~/Posetilac/OstaviKomentar">
+                    <input type="hidden" value="@a.IzabraniTr.Naziv" name="name" />
+                    <input type="submit" value="OSTAVI KOMENTAR" />
+                </form>
+            </td>
+        </tr>
+    </table> }
+else
+{
+    <table>
+        <tr>
+            <td align="center">
+                <form action="~/Posetilac/Cancel">
+                    <input type="hidden" value="@a.IzabraniTr.Naziv" name="name" />
+                    <input type="submit" value="Cancel Trening" />
+                </form>
+            </td>
+        </tr>
+    </table> }
+foreach (var c in a.IzabraniFC.Komentari)
+{
+    <label> @c.Posetilac </label>
+                            <br />
+                                                    <hr width="100%" />
+                                                                            <label> @c.Tekst</label>
+                                                                                                    <br />
+                                                                                                                            <hr width="100%" />
+                                                                                                                                                    <label> Ocena  @c.Ocena  od   5</label>
+                                                                                                                                                                            <br />
+                                                                                                                                                                                                    <hr height="20" width="100%" />}
+                                                                                                                                                                                            }
+                                                                                                                                                                                        }
+                                                                                                                                                                                        else if (Model.Uloga == "Trener")
+                                                                                                                                                                                        {
+                                                                                                                                                                            <form action="~/Trener/PretragaSortiranjeTr">
+                                                                                                                                                                                <div class="search">
+                                                                                                                                                                                    <table style="width: 100%; margin-left: 50px">
+                                                                                                                                                                                        <tr><td align="left" colspan="2"> <label>PRETRAGA/SORTIRANJE</label></td></tr>
+                                                                                                                                                                                        <tr>
+                                                                                                                                                                                            <td>Naziv: <input type="text" name="name" /> </td>
+                                                                                                                                                                                            <td rowspan="9" align="center" valign="middle" style="width: 50%">
+                                                                                                                                                                                                <div style="text-align:center">
+                                                                                                                                                                                                    <input type="submit" value="PRETRAZI" style=" font-size: large; font-family:AIGDT; width: 200px; height: 70px" />
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                            </td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                                                                                                            <td>
+                                                                                                                                                                                                Tip: <input list="type" name="tip" /><br />
+
+                                                                                                                                                                                                <datalist id="type">
+                                                                                                                                                                                                    <option value="Yoga"></option>
+                                                                                                                                                                                                    <option value="Les Mills Tone"></option>
+                                                                                                                                                                                                    <option value="Body Pump"></option>
+                                                                                                                                                                                                </datalist>
+                                                                                                                                                                                            </td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                                                                                                            <td>
+                                                                                                                                                                                                <label> Najranija godina otvaranja:</label>
+                                                                                                                                                                                                <input type="text" name="mingod" value="YYYY" size="4" />
+
+                                                                                                                                                                                            </td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                                                                                                            <td>
+                                                                                                                                                                                                <label>Najkasnija godina otvaranja:</label>
+                                                                                                                                                                                                <input type="text" name="maxgod" value="YYYY" size="4" />
+                                                                                                                                                                                            </td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr class="sort">
+                                                                                                                                                                                            <td>
+                                                                                                                                                                                                <label> Izaberite sortiranje: </label>
+                                                                                                                                                                                                <input list="sortby" name="sortby" size="27" />
+                                                                                                                                                                                                <datalist id="sortby">
+                                                                                                                                                                                                    <option value="Sortiraj po Nazivu"></option>
+                                                                                                                                                                                                    <option value="Sortiraj po Adresi"></option>
+                                                                                                                                                                                                    <option value="Sortiraj po Godini otvaranja"></option>
+                                                                                                                                                                                                </datalist>
+                                                                                                                                                                                            </td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                        <tr>
+                                                                                                                                                                                            <td>
+                                                                                                                                                                                                <label>Izaberite smer sortiranja: </label>
+                                                                                                                                                                                                <input list="sortin" name="sortin" />
+                                                                                                                                                                                                <datalist id="sortin">
+                                                                                                                                                                                                    <option value="Opadajuce"></option>
+                                                                                                                                                                                                    <option value="Rastuce"></option>
+
+                                                                                                                                                                                                </datalist>
+                                                                                                                                                                                            </td>
+                                                                                                                                                                                        </tr>
+                                                                                                                                                                                    </table>
+                                                                                                                                                                                </div>
+                                                                                                                                                                            </form> foreach (var a in Model.GTAngazovan)
+                                                                                                                                                                                            {
+                                                                                                                                                                            <table>
+                                                                                                                                                                                cellspacing="10">
+                                                                                                                                                                                <tr>
+                                                                                                                                                                                    <td colspan="5" class="AName" align="center"> @a.IzabraniTr.Naziv  </td>
+
+                                                                                                                                                                                </tr>
+                                                                                                                                                                                <tr>
+                                                                                                                                                                                    <td>
+                                                                                                                                                                                        Naziv:
+
+                                                                                                                                                                                    </td>
+                                                                                                                                                                                    <td>
+                                                                                                                                                                                        Tip:
+                                                                                                                                                                                    </td>
+                                                                                                                                                                                    <td>
+                                                                                                                                                                                        Vreme odrzavanja:
+                                                                                                                                                                                    </td>
+                                                                                                                                                                                    <td>
+                                                                                                                                                                                        Trajanje
+                                                                                                                                                                                    </td>
+
+                                                                                                                                                                                </tr>
+                                                                                                                                                                                <tr>
+                                                                                                                                                                                    <td> @a.IzabraniTr.Naziv</td>
+                                                                                                                                                                                    <td> @a.IzabraniTr.Tip</td>
+                                                                                                                                                                                    <td> @a.IzabraniTr.DatumVreme.ToShortDateString()</td>
+                                                                                                                                                                                    <td><p>  @a.IzabraniTr.Trajanje  minuta</p></td>
+
+
+                                                                                                                                                                                <tr>
+
+                                                                                                                                                                                    <td colspan="4" align="center"><form action="~/Home/Details"><input type="hidden" value="@a.IzabraniTr.Naziv" name="name"><input type="submit" value="DETALJI" /> </form> </td>
+
+                                                                                                                                                                                </tr>
+                                                                                                                                                                            </table> foreach (var c in a.IzabraniFC.Komentari)
+                                                                                                                                                                            {
+                                                                                                                                                        <label> @c.Posetilac </label>
+                                                                                                                                                                                <br />
+                                                                                                                                                                                                        <hr width="100%" />
+                                                                                                                                                                                                                                <label> @c.Tekst</label>
+                                                                                                                                                                                                                                                        <br />
+                                                                                                                                                                                                                                                                                <hr width="100%" />
+                                                                                                                                                                                                                                                                                                        <label> Ocena  @c.Ocena  od   5</label>
+                                                                                                                                                                                                                                                                                                                                <br />
+                                                                                                                                                                                                                                                                                                                                                        <hr height="20" width="100%" />}
+                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                            }
     </div>
 </body>
 </html>

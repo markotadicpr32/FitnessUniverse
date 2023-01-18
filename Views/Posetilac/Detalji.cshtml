@@ -79,60 +79,66 @@
                 <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaPersonal  RSD</p></td>
             </tr>
         </table>
+
         <h4>Predstojeci grupni treninzi:</h4>
 
         @foreach (var s in Model.GrupniTreninzi)
         {
-            if (s.DatumVreme > ViewBag.time)
+            if (!s.Zauzeto)
             {
-                <form action="~/Posetilac/LogIn">
-                    <table>
-                        <tr>
-                            <td>  @s.Naziv   </td>
-                        </tr>
-                        <tr>
-                            <td> Tip treninga: @s.Tip</td>
-                        </tr>
-                        <tr>
-                            <td> Trajanje treninga: @s.Trajanje</td>
-                        </tr>
-                        <tr>
-                            <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
-                        </tr>
-                        <tr>
-                            <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Broj posetioca trenutno prijavljenih:
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            }
-        }
+    <form action="~/Posetilac/Zakazi">
+        <table>
+            <tr>
+                <td> Naziv treninga:  @s.Naziv   </td>
+
+            </tr>
+            <tr>
+                <td> Cena : @Model.CenaTrening</td>
+            </tr>
+            <tr>
+                <td> Tip:  @s.Tip   </td>
+
+            </tr>
+            <tr>
+                <td> Trajanje:  @s.Trajanje   </td>
+
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td>
+                    <input type="hidden" name="name" value="@Model.Naziv" />
+                    <input type="hidden" name="num" value="@s.num" />
+                    <input type="submit" value="Zakazi trening" />
+                </td>
+            </tr>
+        </table>
+    </form>}
+}
+
+
+
 
         @foreach (var c in Model.Komentari)
         {
             if (!c.IsDeleted && c.IsApproved)
             {
-                <table>
-                    <tr>
-                        <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>Ocena: @c.Ocena od 5</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            @c.Tekst
-                        </td>
-                    </tr>
-                </table>
-            }
-        }
+    <table>
+        <tr>
+            <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
+        </tr>
+        <tr>
+            <td>
+                <p>Ocena: @c.Ocena od 5</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @c.Tekst
+            </td>
+        </tr>
+    </table>}
+}
     </div>
 </body>
 </html>

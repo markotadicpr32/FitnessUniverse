@@ -26,7 +26,7 @@ namespace FitnessUniverse.Controllers
             }
 
             if (u == null)
-                ViewBag.message = " Welcome! Please Login or Create an Account in order to see your personal data.";
+                ViewBag.message = "Dobrodosli! Registrujte se ili ulogojte.";
             else
                 ViewBag.message = " Welcome " + u.Ime + " " + u.Prezime + " ";
 
@@ -61,6 +61,130 @@ namespace FitnessUniverse.Controllers
             return View(args);
         }
 
+
+        public ActionResult PretragaSortiranjeTr()
+        {
+
+            List<GrupniTrening> gt = (List<GrupniTrening>)HttpContext.Application["a"];
+
+            List<GrupniTrening> retgt = new List<GrupniTrening>();
+
+            DateTime bDate = new DateTime();
+            DateTime tDate = new DateTime();
+
+            if (Request["mingod"].Trim() != String.Empty && Request["mingod"] != "YYYY")
+            {
+
+                bDate = new DateTime(int.Parse(Request["mingod"]), 1, 1);
+            }
+            else
+            {
+                bDate = new DateTime(1971, 1, 1);
+            }
+
+            if (Request["maxgod"].Trim() != String.Empty && Request["maxgod"] != "YYYY")
+            {
+
+                tDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
+            }
+            else
+            {
+                tDate = new DateTime(2050, 2, 2);
+            }
+
+            foreach (var a in gt)
+            {
+                if (a.DatumVreme >= bDate && a.DatumVreme <= tDate)
+                    retgt.Add(a);
+            }
+
+            if (Request["sortby"] != string.Empty)
+            {
+                string g = Request["sortby"];
+                if (Request["sortby"] == "Sortiraj po Nazivu")
+                {
+                    if (Request["sortin"] == "Opadajuce")
+                        retgt = retgt.OrderByDescending(o => o.Naziv).ToList<GrupniTrening>();
+                    else
+                        retgt = retgt.OrderBy(o => o.Naziv).ToList<GrupniTrening>();
+                }
+                if (Request["sortby"] == "Sortiraj po Tipu treninga")
+                {
+                    if (Request["sortin"] == "Opadajuce")
+                        retgt = retgt.OrderByDescending(o => o.Tip).ToList<GrupniTrening>();
+                    else
+                        retgt = retgt.OrderBy(o => o.Tip).ToList<GrupniTrening>();
+                }
+                if (Request["sortby"] == "Sortiraj po Godini otaranja")
+                {
+                    if (Request["sortin"] == "Opadajuce")
+                        retgt = retgt.OrderByDescending(o => o.DatumVreme).ToList<GrupniTrening>();
+                    else
+                        retgt = retgt.OrderBy(o => o.DatumVreme).ToList<GrupniTrening>();
+                }
+            }
+
+            if (Request["name"].Trim() != string.Empty)
+            {
+                foreach (var a in retgt.ToList())
+                    if (!(a.Naziv.ToLower().Contains(Request["name"].ToLower())))
+                        retgt.Remove(a);
+            }
+
+            if (Request["tip"].Trim() != string.Empty)
+            {
+                foreach (var a in retgt.ToList())
+                    if (!(a.Tip.ToLower().Contains(Request["tip"].ToLower())))
+                        retgt.Remove(a);
+            }
+
+
+            HttpContext.Application["sorted"] = retgt;
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Zakazi()
+        {
+
+
+            string name = Request["name"];
+            int num = int.Parse(Request["num"]);
+            Korisnik u = (Korisnik)Session["Korisnik"];
+
+
+            if (u == null) return RedirectToAction("LogIn");
+
+            List<FitnesCentar> args = (List<FitnesCentar>)HttpContext.Application["a"];
+
+            foreach (var a in args)
+                if (a.Naziv == name)
+                {
+
+                    foreach (var e in a.GrupniTreninzi)
+                        if (e.num == num)
+                        {
+                            PrijavaTrening r = new PrijavaTrening(u, a, e);
+                            e.Posetioci++;
+                            if(e.Posetioci == e.MaxPosetioci)
+                            {
+                                e.Zauzeto = true;
+                            }
+                            
+                            u.GTPrijavljen.Add(r);
+
+
+                        }
+                }
+
+
+            Data d = new Data();
+            d.saveFC(args);
+
+            return RedirectToAction("Index");
+
+
+        }
         public ActionResult MojProfil()
         {
             Korisnik u = (Korisnik)Session["Korisnik"];
@@ -75,6 +199,40 @@ namespace FitnessUniverse.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+        public ActionResult Cancel()
+        {
+            string name = Request["name"];
+            List<FitnesCentar> args = (List<FitnesCentar>)HttpContext.Application["a"];
+
+            Korisnik u = (Korisnik)Session["Korisnik"];
+
+
+            foreach (var a in args)
+                if (a.Naziv == name)
+                {
+
+                    foreach (var r in u.GTPrijavljen.ToList())
+
+                        if (r.IzabraniTr.Naziv == a.Naziv)
+                        {
+                            foreach (var SJ in a.GrupniTreninzi)
+                                if (SJ.num == r.IzabraniTr.num)
+                                    SJ.Zauzeto = false;
+                            u.GTPrijavljen.Remove(r);
+                            u.Cancels++;
+                            Session["Korisnik"] = u;
+                        }
+                }
+
+            List<Korisnik> users = (List<Korisnik>)HttpContext.Application["users"];
+            Data d = new Data();
+            d.saveUsers(users);
+            d.saveFC(args);
+
+            return RedirectToAction("MojProfil");
+
         }
 
         public ActionResult Detalji()
@@ -95,7 +253,7 @@ namespace FitnessUniverse.Controllers
         }
 
 
-        public ActionResult OstaviKomentar()
+        public ActionResult Komentarisi()
         {
             Korisnik u = (Korisnik)Session["Korisnik"];
 
@@ -119,6 +277,21 @@ namespace FitnessUniverse.Controllers
             return RedirectToAction("MojProfil");
         }
 
+        public ActionResult OstaviKomentar()
+        {
+            string name = Request["name"];
+            List<FitnesCentar> fc = (List<FitnesCentar>)HttpContext.Application["a"];
+
+            foreach (var a in fc)
+                if (a.Naziv == name)
+                    return View(a);
+
+            Data d = new Data();
+            d.saveFC(fc);
+
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public ActionResult LoginC()
         {
@@ -137,20 +310,20 @@ namespace FitnessUniverse.Controllers
                         if (u.IsDeleted == true)
                         {
                             ViewBag.message = "ACCESS DENIED";
-                            return View("Login");
+                            return View("LogIn");
                         }
-                        Session["User"] = u;
+                        Session["Korisnik"] = u;
                         return RedirectToAction("Index");
                     }
                     else
                     {
                         ViewBag.message = "YOUR PASSWORD IS INCORECT";
-                        return View("Login");
+                        return View("LogIn");
                     }
                 }
             }
             ViewBag.message = "THAT USERNAME DOESN'T EXIST";
-            return View("Login");
+            return View("LogIn");
         }
 
         public ActionResult PretragaSortiranje()
@@ -176,7 +349,7 @@ namespace FitnessUniverse.Controllers
             if (Request["maxgod"].Trim() != String.Empty && Request["maxgod"] != "YYYY")
             {
 
-                bDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
+                tDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
             }
             else
             {
@@ -192,21 +365,21 @@ namespace FitnessUniverse.Controllers
             if (Request["sortby"] != string.Empty)
             {
                 string g = Request["sortby"];
-                if (Request["sortby"] == "Sortiraj po nazivu")
+                if (Request["sortby"] == "Sortiraj po Nazivu")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Naziv).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Naziv).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po adresi")
+                if (Request["sortby"] == "Sortiraj po Adresi")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Adresa).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Adresa).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po godini otaranja")
+                if (Request["sortby"] == "Sortiraj po Godini otaranja")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.GodinaOtvaranja).ToList<FitnesCentar>();
@@ -219,6 +392,13 @@ namespace FitnessUniverse.Controllers
             {
                 foreach (var a in retfc.ToList())
                     if (!(a.Naziv.ToLower().Contains(Request["name"].ToLower())))
+                        retfc.Remove(a);
+            }
+
+            if (Request["address"].Trim() != string.Empty)
+            {
+                foreach (var a in retfc.ToList())
+                    if (!(a.Adresa.ToLower().Contains(Request["address"].ToLower())))
                         retfc.Remove(a);
             }
 
@@ -253,7 +433,7 @@ namespace FitnessUniverse.Controllers
             if (Request["maxgod"].Trim() != String.Empty && Request["maxgod"] != "YYYY")
             {
 
-                bDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
+                tDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
             }
             else
             {
@@ -269,21 +449,21 @@ namespace FitnessUniverse.Controllers
             if (Request["sortby"] != string.Empty)
             {
                 string g = Request["sortby"];
-                if (Request["sortby"] == "Sortiraj po nazivu")
+                if (Request["sortby"] == "Sortiraj po Nazivu")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Naziv).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Naziv).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po adresi")
+                if (Request["sortby"] == "Sortiraj po Adresi")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Adresa).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Adresa).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po godini otaranja")
+                if (Request["sortby"] == "Sortiraj po Godini otaranja")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.GodinaOtvaranja).ToList<FitnesCentar>();
@@ -300,7 +480,12 @@ namespace FitnessUniverse.Controllers
                         retfc.Remove(a);
             }
 
-
+            if (Request["address"].Trim() != string.Empty)
+            {
+                foreach (var a in retfc.ToList())
+                    if (!(a.Adresa.ToLower().Contains(Request["address"].ToLower())))
+                        retfc.Remove(a);
+            }
 
             HttpContext.Application["sorted"] = retfc;
 
@@ -371,20 +556,7 @@ namespace FitnessUniverse.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Komentarisi()
-        {
-            string name = Request["name"];
-            List<FitnesCentar> fc = (List<FitnesCentar>)HttpContext.Application["a"];
-
-            foreach (var a in fc)
-                if (a.Naziv == name)
-                    return View(a);
-
-            Data d = new Data();
-            d.saveFC(fc);
-
-            return RedirectToAction("Index");
-        }
+        
 
         public ActionResult Izmena()
         {

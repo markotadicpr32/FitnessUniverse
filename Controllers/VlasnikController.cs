@@ -55,6 +55,12 @@ namespace FitnessUniverse.Controllers
             return RedirectToAction("Users");
         }
 
+        public ActionResult PregledTrenera()
+        {
+            return View();
+        }
+
+
         public ActionResult Detalji()
         {
             string name = Request["name"];
@@ -316,7 +322,7 @@ namespace FitnessUniverse.Controllers
             if (Request["maxgod"].Trim() != String.Empty && Request["maxgod"] != "YYYY")
             {
 
-                bDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
+                tDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
             }
             else
             {
@@ -332,21 +338,21 @@ namespace FitnessUniverse.Controllers
             if (Request["sortby"] != string.Empty)
             {
                 string g = Request["sortby"];
-                if (Request["sortby"] == "Sortiraj po nazivu")
+                if (Request["sortby"] == "Sortiraj po Nazivu")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Naziv).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Naziv).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po adresi")
+                if (Request["sortby"] == "Sortiraj po Adresi")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Adresa).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Adresa).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po godini otaranja")
+                if (Request["sortby"] == "Sortiraj po Godini otaranja")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.GodinaOtvaranja).ToList<FitnesCentar>();
@@ -363,7 +369,12 @@ namespace FitnessUniverse.Controllers
                         retfc.Remove(a);
             }
 
-
+            if (Request["address"].Trim() != string.Empty)
+            {
+                foreach (var a in retfc.ToList())
+                    if (!(a.Adresa.ToLower().Contains(Request["address"].ToLower())))
+                        retfc.Remove(a);
+            }
 
             HttpContext.Application["sorted"] = retfc;
 
@@ -414,7 +425,7 @@ namespace FitnessUniverse.Controllers
             if (Request["maxgod"].Trim() != String.Empty && Request["maxgod"] != "YYYY")
             {
 
-                bDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
+                tDate = new DateTime(int.Parse(Request["maxgod"]), 1, 1);
             }
             else
             {
@@ -430,21 +441,21 @@ namespace FitnessUniverse.Controllers
             if (Request["sortby"] != string.Empty)
             {
                 string g = Request["sortby"];
-                if (Request["sortby"] == "Sortiraj po nazivu")
+                if (Request["sortby"] == "Sortiraj po Nazivu")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Naziv).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Naziv).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po adresi")
+                if (Request["sortby"] == "Sortiraj po Adresi")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.Adresa).ToList<FitnesCentar>();
                     else
                         retfc = retfc.OrderBy(o => o.Adresa).ToList<FitnesCentar>();
                 }
-                if (Request["sortby"] == "Sortiraj po godini otaranja")
+                if (Request["sortby"] == "Sortiraj po Godini otaranja")
                 {
                     if (Request["sortin"] == "Opadajuce")
                         retfc = retfc.OrderByDescending(o => o.GodinaOtvaranja).ToList<FitnesCentar>();
@@ -460,6 +471,12 @@ namespace FitnessUniverse.Controllers
                         retfc.Remove(a);
             }
 
+            if (Request["address"].Trim() != string.Empty)
+            {
+                foreach (var a in retfc.ToList())
+                    if (!(a.Adresa.ToLower().Contains(Request["address"].ToLower())))
+                        retfc.Remove(a);
+            }
 
             HttpContext.Application["sorted"] = retfc;
 

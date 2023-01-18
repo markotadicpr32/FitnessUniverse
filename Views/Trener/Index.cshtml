@@ -57,13 +57,7 @@
 
             <a href="~/Posetilac/MojProfil"> MOJ PROFIL </a> <br> <a href="~/Posetilac/LogOut"> LOG OUT</a>
 
-            <form action="~/Trener/DodajTrening">
-                <input type="submit" value="DODAJ TRENING" />
-            </form>
-
-            <br><a href="~/Trener/BuduciTreninzi"> Buduci treninzi </a>
-
-            <br><a href="~/Trener/IstorijaTreninga"> Istorija treninga </a>
+           
 
 
 
@@ -71,7 +65,7 @@
             <h4>		Spisak fitnes centara:</h4>
 
 
-            <form action="~/Posetilac/PretragaSortiranje">
+            <form action="~/Trener/PretragaSortiranje">
                 <div class="search">
 
                     <table style="width: 100%; margin-left: 50px">
@@ -138,7 +132,7 @@
             {
 
 
-                <form action="~/Posetilac/Detalji">
+                <form action="~/Trener/Detalji">
                     <table cellspacing="10" class="tab" style="width: 100%">
                         <tr>
                             <td>
@@ -158,7 +152,7 @@
 
                             <td fontsize="2" width="100" align="center"><p colour="red">  @m.Naziv </p></td>
                             <td fontsize="2" width="100" align="center"><p colour="red">  @m.Adresa </p></td>
-                            <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja </p></td>
+                            <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja.Year </p></td>
 
                         </tr>
 

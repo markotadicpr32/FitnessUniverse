@@ -77,59 +77,75 @@
                 <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaPersonal  RSD</p></td>
             </tr>
         </table>
-        <h4>Predstojeci grupni treninzi:</h4>
+ 
+        <form action="~/Trener/DodajTrening">
+            <input type="hidden" value="@Model.Naziv" name="naziv" />
+            <input type="submit" value="DODAJ TRENING" />
+        </form>
 
-        @foreach (var s in Model.GrupniTreninzi)
-        {
-            if (s.DatumVreme > ViewBag.time)
-            {
-<form action="~/Posetilac/LogIn">
-    <table>
-        <tr>
-            <td>  @s.Naziv   </td>
-        </tr>
-        <tr>
-            <td> Tip treninga: @s.Tip</td>
-        </tr>
-        <tr>
-            <td> Trajanje treninga: @s.Trajanje</td>
-        </tr>
-        <tr>
-            <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
-        </tr>
-        <tr>
-            <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
-        </tr>
-        <tr>
-            <td>
-                Broj posetioca trenutno prijavljenih:
-            </td>
-        </tr>
-    </table>
-</form>}
-            }
+                    <h4>Predstojeci grupni treninzi:</h4>
 
-        @foreach (var c in Model.Komentari)
-        {
-            if (!c.IsDeleted && c.IsApproved)
-            {
-<table>
-    <tr>
-        <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
-    </tr>
-    <tr>
-        <td>
-            <p>Ocena: @c.Ocena od 5</p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @c.Tekst
-        </td>
-    </tr>
-</table>}
-            }
-    </div>
+                                    @foreach (var s in Model.GrupniTreninzi)
+                                    {
+                    <form action="~/Posetilac/Zakazi">
+                        <table>
+                            <tr>
+                                <td> Naziv treninga:  @s.Naziv   </td>
+
+                            </tr>
+                            <tr>
+                                <td> Cena : @Model.CenaTrening</td>
+                            </tr>
+                            <tr>
+                                <td> Tip:  @s.Tip   </td>
+
+                            </tr>
+                            <tr>
+                                <td> Trajanje:  @s.Trajanje   </td>
+
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+
+                                @if (!s.Zauzeto)
+                                {
+                                    <td> Trenutan broj prijavljenih: @s.Posetioci </td>
+                                }
+                                else
+                                {
+                                    <td> Maksimalan broj prijavljenih dostignut! (@s.MaxPosetioci) </td>
+                                }
+
+                            </tr>
+                        </table>
+                    </form>}
+
+
+
+                                                    @foreach (var c in Model.Komentari)
+                                                    {
+                                                        if (!c.IsDeleted && c.IsApproved)
+                                                        {
+                                    <table>
+                                        <tr>
+                                            <td align="left"> <label>Korisnik: @c.Posetilac </label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Ocena: @c.Ocena od 5</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @c.Tekst
+                                            </td>
+                                        </tr>
+                                    </table>}
+
+
+                            }
+                                                                </div>
 </body>
 </html>
 

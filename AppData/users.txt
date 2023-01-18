@@ -1,1 +1,11 @@
-vlasnik|vlasnik|vlasnik|vlasnikic|Vlasnik|vlasnik@gmail.com|0|2/2/2222|Female|N|anabanana|anabanana|ana|banana|Posetilac|anabanana@gmail.com|0|2/16/2002|Zensko|N|
+vlasnik|vlasnik|vlasnik|vlasnikic|Vlasnik|vlasnik@gmail.com|0|2/2/2222|Female|N|
+admin|admin|admin|adminic|Vlasnik|admin@gmail.com|0|2/2/2222|Female|N|
+man|man|admin|adminic|Trener|mena@gmail.com|0|2/2/2222|Female|N|
+pera|pera|pera|pera|Trener|pera@gmail.com|0|10/23/1999|Male|N|
+brod|brod|broid|brodic|Trener|brod@gmail.com|5|2/21/1997|Male|N|
+User|pass|dejan|dejancic|Posetilac|ja@gmail.com|0|12/12/1993|Female|N|
+asd|asd|asd|asd|Posetilac|asd@gmail.com|0|11/11/2011|Male|N|
+anabanana|anabanana|anica|bananica|Posetilac|anabanana@gmail.com|0|11/12/2002|Male|N|
+lol|lol|Lol|Lolic|Posetilac|lol@gmail.com|0|12/12/2001|Male|N|
+trener|trener123|Trener|Treneric|Trener|trener@gmail.com|0|10/11/2001|Musko|N|
+

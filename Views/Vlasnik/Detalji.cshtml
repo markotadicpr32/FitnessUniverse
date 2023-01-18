@@ -77,37 +77,35 @@
                 <td fontsize="2" style="width: 100px;" align="center"><p colour="red">  @Model.CenaPersonal  RSD</p></td>
             </tr>
         </table>
+
+        <form action="~/Vlasnik/ObrisiFC">
+            <input type="submit" value="OBRISI FITNES CENTAR" />
+        </form>
+
         <h4>Predstojeci grupni treninzi:</h4>
 
         @foreach (var s in Model.GrupniTreninzi)
         {
-            if (s.DatumVreme > ViewBag.time)
+            if (!s.Zauzeto)
             {
-    <form action="~/Posetilac/LogIn">
-        <table>
-            <tr>
-                <td>  @s.Naziv   </td>
-            </tr>
-            <tr>
-                <td> Tip treninga: @s.Tip</td>
-            </tr>
-            <tr>
-                <td> Trajanje treninga: @s.Trajanje</td>
-            </tr>
-            <tr>
-                <td> Datum i vreme izvodjenja treninga : @s.DatumVreme</td>
-            </tr>
-            <tr>
-                <td> Maksimalan broj posetilaca : @s.MaxPosetioci</td>
-            </tr>
-            <tr>
-                <td>
-                    Broj posetioca trenutno prijavljenih:
-                </td>
-            </tr>
-        </table>
-    </form>}
-}
+    <table>
+        <tr>
+            <td> Naziv treninga:  @s.Naziv   </td>
+
+        </tr>
+        <tr>
+            <td> Cena : @Model.CenaTrening</td>
+        </tr>
+        <tr>
+            <td> Tip:  @s.Tip   </td>
+
+        </tr>
+        <tr>
+            <td> Trajanje:  @s.Trajanje   </td>
+
+        </tr>
+    </table>}
+                }
 
         @foreach (var c in Model.Komentari)
         {
@@ -121,29 +119,29 @@
         <input type="hidden" value="@c.ID" name="id" />
         <input type="submit" value="ODOBRI KOMENTAR" />
     </form>
-    <form action="~/Vlasnik/DelComment">
-        <input type="hidden" value="@Model.Naziv" name="name" />
-        <input type="hidden" value="@c.ID" name="id" />
-        <input type="submit" value="ODOBRI KOMENTAR" />
-    </form> }
+                            <form action="~/Vlasnik/DelComment">
+                                <input type="hidden" value="@Model.Naziv" name="name" />
+                                <input type="hidden" value="@c.ID" name="id" />
+                                <input type="submit" value="ODOBRI KOMENTAR" />
+                            </form> }
 
-                            <table>
-                                <tr>
-                                    <td align="left"> <label>User: @c.Posetilac </label></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        @c.Tekst
-                                    </td>
-                                </tr>
+    <table>
+        <tr>
+            <td align="left"> <label>User: @c.Posetilac </label></td>
+        </tr>
+        <tr>
+            <td>
+                @c.Tekst
+            </td>
+        </tr>
 
-                                <tr>
-                                    <td>
-                                        <p>Ocena: @c.Ocena od 5</p>
-                                    </td>
-                                </tr>
-                            </table>}
-                                        }
+        <tr>
+            <td>
+                <p>Ocena: @c.Ocena od 5</p>
+            </td>
+        </tr>
+    </table>}
+}
     </div>
 </body>
 </html>

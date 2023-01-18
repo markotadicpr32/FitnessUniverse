@@ -17,8 +17,8 @@ namespace FitnessUniverse.Models
             Email = email;
             DatumRodjenja = datumRodjenja;
             Uloga = "Posetilac";
-            GTPrijavljen = new List<GrupniTrening>();
-            GTAngazovan = new List<GrupniTrening>();
+            GTPrijavljen = new List<PrijavaTrening>();
+            GTAngazovan = new List<AngazovanjeTrening>();
             //FCAngazovan = fcangazovan;
             FCVlasnik = new List<FitnesCentar>();
             Cancels = 0;
@@ -32,8 +32,8 @@ namespace FitnessUniverse.Models
         public string Pol { get; set; }
         public string Email { get; set; }
         public string Uloga { get; set; }
-        public List<GrupniTrening> GTPrijavljen { get; set; }
-        public List<GrupniTrening> GTAngazovan { get; set; }
+        public List<PrijavaTrening> GTPrijavljen { get; set; }
+        public List<AngazovanjeTrening> GTAngazovan { get; set; }
         public List<FitnesCentar> FCVlasnik { get; set; }
         public bool IsDeleted { get; set; }
         public int Cancels { get; set; }

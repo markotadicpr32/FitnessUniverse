@@ -88,7 +88,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppData\gt.txt" />
     <Content Include="AppData\fc.txt" />
     <Content Include="AppData\users.txt" />
     <Content Include="Content\Site.css" />
@@ -103,11 +102,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AngazovanjeTrening.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\FitnesCentar.cs" />
     <Compile Include="Models\GrupniTrening.cs" />
     <Compile Include="Models\Komentar.cs" />
     <Compile Include="Models\Korisnik.cs" />
+    <Compile Include="Models\PrijavaTrening.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,12 +124,9 @@
     <Content Include="Views\Posetilac\IstorijaTreninga.cshtml" />
     <Content Include="Views\Posetilac\MojProfil.cshtml" />
     <Content Include="Views\Posetilac\IzmeniProfil.cshtml" />
-    <Content Include="Views\Trener\IstorijaTreninga.cshtml" />
     <Content Include="Views\Trener\IzmeniTrening.cshtml" />
-    <Content Include="Views\Trener\BuduciTreninzi.cshtml" />
     <Content Include="Views\Trener\DodajTrening.cshtml" />
     <Content Include="Views\Posetilac\OstaviKomentar.cshtml" />
-    <Content Include="Views\Vlasnik\PregledFitnesCentara.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Vlasnik\DodajFC.cshtml" />

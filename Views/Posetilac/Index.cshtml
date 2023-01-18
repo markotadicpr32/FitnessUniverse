@@ -49,14 +49,14 @@
             <h1 colour="red"> DOBRODOSLI U FITNESS UNIVERSE</h1>
             <h2> @ViewBag.message </h2>
 
-            @if (ViewBag.message != " Dobrodosli! Ulogujte se ili napravite profil!")
+            @if (ViewBag.message != "Dobrodosli! Registrujte se ili ulogojte.")
             {
-                <a href="~/Posetilac/LogIn"> LOG IN  </a> <br> <a href="~/Posetilac/Register">  REGISTER </a>
                 
+                <a href="~/Posetilac/MojProfil"> MOJ PROFIL </a> <br> <a href="~/Posetilac/LogOut"> LOG OUT</a>
             }
             else
             {
-                <a href="~/Posetilac/MojProfil"> MOJ PROFIL </a> <br> <a href="~/Posetilac/LogOut"> LOG OUT</a>
+                <a href="~/Posetilac/LogIn"> LOG IN  </a> <br> <a href="~/Posetilac/Register">  REGISTER </a>
             }
 
             <h4>		Spisak fitnes centara:</h4>
@@ -134,7 +134,7 @@
 
                                 <td fontsize="2" width="100" align="center"><p colour="red">  @m.Naziv </p></td>
                                 <td fontsize="2" width="100" align="center"><p colour="red">  @m.Adresa </p></td>
-                                <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja </p></td>
+                                <td fontsize="2" width="100" align="center"><p colour="red">  @m.GodinaOtvaranja.Year </p></td>
                             </tr>
                             <tr>
 

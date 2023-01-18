@@ -30,6 +30,15 @@ namespace FitnessUniverse.Models
 
                 text = text + a.Naziv + "|" + a.Adresa + "|" + a.GodinaOtvaranja.ToShortDateString() + "|" + a.CenaMesec + "|" + a.CenaGodina + "|" + a.CenaTrening + "|" + a.CenaGrupni + "|" + a.CenaPersonal + "|" + del + "|" + a.Vlasnik + "|";
 
+                foreach (var d in a.GrupniTreninzi)
+                {
+                    string delll = "N";
+                    if (d.IsDeleted) delll = "N";
+                    text = text + d.num + "!" + d.Naziv + "!" + d.Tip + "!" + d.Trajanje + "!" + d.DatumVreme + "!" + d.MaxPosetioci + "!" + delll + "?";
+                }
+
+                text = text + "|";
+
                 foreach (var c in a.Komentari)
                 {
                     string delll = "N";
@@ -60,8 +69,7 @@ namespace FitnessUniverse.Models
                 {
                     string[] lines = line.Split('|');
 
-                    DateTime d = new DateTime(int.Parse(lines[2]), 1, 1);
-
+                    DateTime d = new DateTime(int.Parse(lines[2].Split('/')[2]), int.Parse(lines[2].Split('/')[0]), int.Parse(lines[2].Split('/')[1]));
 
                     FitnesCentar a = new FitnesCentar(lines[0], lines[1], d, int.Parse(lines[3]), int.Parse(lines[4]), int.Parse(lines[5]), int.Parse(lines[6]), int.Parse(lines[7]));
 
@@ -72,7 +80,32 @@ namespace FitnessUniverse.Models
 
                     a.Vlasnik = lines[9];
 
-                    foreach (var r in lines[10].Split('#'))
+
+                    foreach (var f in lines[10].Split('?'))
+                    {
+
+                        if (f != "" && f != "\n")
+                        {
+
+
+                            string[] sjs = f.Split('!');
+                            bool del = false;
+                            if (sjs[6] == "Y") del = true;
+
+
+                            DateTime d1 = new DateTime(int.Parse(sjs[4].Split('/')[2]), int.Parse(sjs[4].Split('/')[0]), int.Parse(sjs[4].Split('/')[1]));
+
+                            GrupniTrening sj = new GrupniTrening(int.Parse(sjs[0]), sjs[1], sjs[2], int.Parse(sjs[3]), d1, int.Parse(sjs[5]), false);
+                            sj.IsDeleted = del;
+
+                            a.GrupniTreninzi.Add(sj);
+                            a.Grupni = sj;
+                        }
+                    }
+
+                    
+
+                    foreach (var r in lines[11].Split('#'))
                     {
                         if (r != "" && r != "\n")
                         {
@@ -118,6 +151,8 @@ namespace FitnessUniverse.Models
                 if (s.IsDeleted) del = "Y"; else del = "N";
 
                 text = text + s.Username + "|" + s.Password + "|" + s.Ime + "|" + s.Prezime + "|" + s.Uloga + "|" + s.Email + "|" + s.Cancels + "|" + s.DatumRodjenja.ToShortDateString() + "|" + s.Pol + "|" + del + "|";
+
+                text = text + "\n";
             }
 
             StreamWriter sw = new StreamWriter(userFile, false, Encoding.ASCII);
@@ -157,7 +192,7 @@ namespace FitnessUniverse.Models
             }
             return ret;
         }
-
+        
         public void saveGT(List<GrupniTrening> gt)
         {
             string text = "";
@@ -175,7 +210,7 @@ namespace FitnessUniverse.Models
             StreamWriter sw = new StreamWriter(userFile, false, Encoding.ASCII);
             sw.WriteLine(text);
             sw.Close();
-
+        
         }
     }
 }
